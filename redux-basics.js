@@ -14,18 +14,35 @@ const initialState = {
 
  const rootReducer = (state = initialState, action) => {
      // reducer is function that takes state and action as parameter and returns state
-        return state;
+     console.log("state inside reducer", state);
+     if(action.type === 'INC_COUNTER'){
+         return {
+             ...state,
+             counter: state.counter + 1
+         }
+     }
+
+     if(action.type === 'ADD_COUNTER'){
+        return {
+            ...state,
+            counter: state.counter + action.pay_load.value
+        }
+    }
+
+    return state
+       
  }
 
 
 // STORE
 
-const store = createStore(rootReducer);
-console.log(store.getState());
+const mystore = createStore(rootReducer);
+ console.log(mystore.getState());
 
 
 
 // DISPATCHING ACTION
-
-
+mystore.dispatch({type: 'INC_COUNTER'});
+mystore.dispatch({type: 'ADD_COUNTER', pay_load : {value: 10} });
+console.log(mystore.getState());
 // SUBSCRIPTION
