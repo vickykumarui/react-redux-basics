@@ -39,10 +39,15 @@ const initialState = {
 const mystore = createStore(rootReducer);
  console.log(mystore.getState());
 
+// SUBSCRIPTION
 
+mystore.subscribe(() =>{
+    console.log("[Subscription called]", mystore.getState());
+})
 
 // DISPATCHING ACTION
 mystore.dispatch({type: 'INC_COUNTER'});
 mystore.dispatch({type: 'ADD_COUNTER', pay_load : {value: 10} });
 console.log(mystore.getState());
-// SUBSCRIPTION
+
+
